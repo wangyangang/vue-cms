@@ -1,0 +1,9 @@
+.div1{
+    border: 1px solid red;
+}
+.div2{
+    width: 400px;
+    height: 300px;
+    background: url('../images/1.jpg');
+    background-size: cover;
+}
