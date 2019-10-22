@@ -30,9 +30,11 @@
 <script>
 
 </script>
-<style>
+<style lang="scss">
     .app-container{
         padding-top: 40px;
+		padding-bottom: 50px;
+		width: 100%;
 		/*解决vue切换的时候 顶部面板移动 一个vue完全消失另一个才出现 */
 		overflow-x: hidden;
 		position: absolute;

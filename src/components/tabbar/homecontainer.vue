@@ -8,11 +8,11 @@
     <!--九宫格，用mui的griddefault-->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/newslist">
           <!-- <span class="mui-icon mui-icon-home"></span> -->
           <img src="../../images/menu1.png" alt="">
           <div class="mui-media-body">新闻资讯</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     getSwipeData() {
-      this.$http.get("http://127.0.0.1:3001/getinfo").then(res => {
+      this.$http.get("api/getinfo").then(res => {
         if (res.status === 200) {
           this.swipeList = res.body;
         } else {
