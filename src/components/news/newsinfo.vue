@@ -1,6 +1,6 @@
 <template>
   <div class="newsinfo-container">
-    <h1 class="newsinfo-title">新闻详情--{{id}}</h1>
+    <h1 class="newsinfo-title">新闻详情--{{article_id}}</h1>
     <p class="newsinfo-subtitle">
       <span>发表日期:{{ctime | dateFormat}}</span>
       <span>点击:{{click}}次</span>
@@ -9,7 +9,7 @@
     <div class="newsinfo-content" v-html="content"></div>
 
     <!--评论子组件-->
-    <commentbox :articleid="this.id"></commentbox>
+    <commentbox :article_id="this.article_id"></commentbox>
   </div>
 
   
@@ -22,7 +22,7 @@ import commentComponent from '../subcomponents/comment.vue'
 export default {
   data() {
     return {
-      id: this.$route.params.id,
+      article_id: this.$route.params.id,
       title: "",
       ctime: null,
       click: 0,
@@ -31,12 +31,13 @@ export default {
   },
   methods: {
     getNewsInfo(news_id) {
-      this.$http.get("api/getnewsinfo/" + news_id).then(res => {
-        if (res.status === 200) {
-          this.title = res.body[0].title;
-          this.ctime = res.body[0].ctime;
-          this.click = res.body[0].click;
-          this.content = res.body[0].content;
+      this.$http.get("api/newsinfo/" + news_id).then(res => {
+        
+        if (res.body.status === 200) {
+          this.title = res.body.body[0].title;
+          this.ctime = res.body.body[0].ctime;
+          this.click = res.body.body[0].click;
+          this.content = res.body.body[0].content;
           Toast("获取文章详情成功");
         } else {
           Toast("获取文章详情失败");
@@ -45,7 +46,7 @@ export default {
     }
   },
   created() {
-    this.getNewsInfo(this.id);
+    this.getNewsInfo(this.article_id);
   },
   components:{
       'commentbox': commentComponent

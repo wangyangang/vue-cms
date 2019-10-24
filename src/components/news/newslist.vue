@@ -3,11 +3,11 @@
         <ul class="mui-table-view">
 				<li class="mui-table-view-cell mui-media" v-for="news in newslist" :key="news.id">
 					<router-link :to="'/home/newsinfo/'+news.id">
-						<img class="mui-media-object mui-pull-left" src="https://avatars0.githubusercontent.com/u/16028271?s=40&v=4">
+						<img class="mui-media-object mui-pull-left" :src="news.img">
 						<div class="mui-media-body">
 							<h1>{{news.title}}</h1>
 							<p class="mui-ellipsis">
-                                <span>发表时间:{{news.ctime | dataFormat}}</span>
+                                <span>发表时间:{{news.ctime | dateFormat}}</span>
                                 <span>点击:{{news.click}}次</span>
                             </p>
 						</div>
@@ -26,9 +26,10 @@ export default {
     },
     methods:{
         getNewsList(){
-            this.$http.get('api/getnewslist').then(res=>{
-                if(res.status === 200){
-                    this.newslist = res.body;
+            this.$http.get('api/newslist').then(res=>{
+                if(res.body.status === 200){
+                    this.newslist = res.body.body;
+                    
                     //Toast('获取新闻列表失败')
                 }else{
                     Toast('获取新闻列表失败')

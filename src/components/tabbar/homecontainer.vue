@@ -1,10 +1,6 @@
 <template>
   <div>
-    <mt-swipe :auto="1000">
-      <mt-swipe-item v-for="item in swipeList" :key="item.url">
-        <img :src="item.img" alt />
-      </mt-swipe-item>
-    </mt-swipe>
+    <swiper :swipelist="swipeList" :isfull="true"></swiper>
     <!--九宫格，用mui的griddefault-->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -15,18 +11,18 @@
         </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/photolist">
           
           <img src="../../images/menu2.png" alt="">
           <div class="mui-media-body">图片分享</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
-        <a href="#">
+        <router-link to="/home/goodslist">
           <!-- <span class="mui-icon mui-icon-chatbubble"></span> -->
           <img src="../../images/menu3.png" alt="">
           <div class="mui-media-body">商品购买</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
         <a href="#">
@@ -55,6 +51,7 @@
 
 <script>
 import { Toast } from "mint-ui";
+import swiperVue from '../subcomponents/swiper.vue';
 
 export default {
   data() {
@@ -64,42 +61,28 @@ export default {
   },
   methods: {
     getSwipeData() {
-      this.$http.get("api/getinfo").then(res => {
-        if (res.status === 200) {
-          this.swipeList = res.body;
+      this.$http.get("api/swipelist").then(res => {
+        if (res.body.status === 200) {
+          this.swipeList = res.body.body.slice(0,3);
         } else {
           Toast("轮播图加载失败");
         }
-        this.swipeList = res.body;
         console.log(res);
       });
     }
   },
   created() {
     this.getSwipeData();
+  },
+  components:{
+    'swiper': swiperVue
   }
 };
 </script>
 
 <style lang="scss">
-.mint-swipe {
-  height: 200px;
-}
-.mint-swipe-item {
-  &:nth-child(1) {
-    background-color: red;
-  }
-  &:nth-child(2) {
-    background-color: blue;
-  }
-  &:nth-child(3) {
-    background-color: green;
-  }
-}
-image {
-  width: 100%;
-  height: 100%;
-}
+
+
 .mui-grid-view.mui-grid-9{
     background-color: white;
     img{

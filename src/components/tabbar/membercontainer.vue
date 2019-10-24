@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>membercontainer</h1>
+        <h1 class="red">membercontainer</h1>
     </div>
 </template>
 
@@ -10,6 +10,8 @@ export default {
 }
 </script>
 
-<style>
-    
+<style lang="scss" scoped>
+    .red{
+        color:yellow;
+    }
 </style>
