@@ -31,8 +31,8 @@ import {Toast} from 'mint-ui'
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
 //Vue.http.options.root = 'http://127.0.0.1:3001';//设置请求的根路径
-//Vue.http.options.root = 'http://127.0.0.1:8000';//设置请求的根路径
-Vue.http.options.root = 'http://172.16.0.47:8000';//设置请求的根路径
+Vue.http.options.root = 'http://120.25.224.111:8000';//设置请求的根路径
+//Vue.http.options.root = 'http://172.16.0.47:8000';//设置请求的根路径
 // 设置全局pst的时候表单数据的组织形式为application/x-www-form-urlencode MIME格式
 Vue.http.options.emulateJSON = true 
 
